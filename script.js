@@ -53,7 +53,6 @@
     }
 })();
 */
-
 const messages = [
   "Are you sure Sundru? 😢",
   "Really really sure?? 🥺",
@@ -70,6 +69,7 @@ const messages = [
 let messageIndex = 0;
 let sadMusicPlayed = false;
 
+// Function for the "No" button click
 function handleNoClick() {
   const noButton = document.querySelector('.no-button');
   const yesButton = document.querySelector('.yes-button');
@@ -89,18 +89,31 @@ function handleNoClick() {
   }
 }
 
+// Function for the "Yes" button click
 function handleYesClick() {
   const yesMusic = document.getElementById('yesMusic');
   if (yesMusic) {
     yesMusic.play(); // Play yes music immediately when 'Yes' is clicked
   }
+
   window.location.href = "yes_page.html";
 }
 
+// Ensure that both music files are preloaded
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector('.no-button')?.addEventListener("click", handleNoClick);
-  document.querySelector('.yes-button')?.addEventListener("click", handleYesClick);
-});
+  // Preload yes_music and no_music
+  const yesMusic = document.getElementById('yesMusic');
+  const sadAudio = document.getElementById('sadAudio');
 
+  // Preload both audio files to ensure they're ready to play
+  if (yesMusic) {
+    yesMusic.load();
+  }
+  if (sadAudio) {
+    sadAudio.load();
+  }
+
+  // Add click event listeners
+  document.querySelector('.no-button')?.addEventListener("click", handleNoClick);
   document.querySelector('.yes-button')?.addEventListener("click", handleYesClick);
 });
