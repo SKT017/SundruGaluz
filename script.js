@@ -80,19 +80,27 @@ function handleNoClick() {
   const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
   yesButton.style.fontSize = `${currentSize * 1.2}px`;
 
-  const noMusic = document.getElementById('sadAudio');
-  if (noMusic) {
-    noMusic.play(); // Play the sad music immediately when "No" is clicked
+  if (!sadMusicPlayed) {
+    const audio = document.getElementById('sadAudio');
+    if (audio) {
+      audio.play();
+      sadMusicPlayed = true;
+    }
   }
 }
 
 function handleYesClick() {
-  const yesMusic = new Audio("yes_music.mp3");
-  yesMusic.play(); // Play the "Yes" music immediately when "Yes" is clicked
+  const yesMusic = document.getElementById('yesMusic');
+  if (yesMusic) {
+    yesMusic.play(); // Play yes music immediately when 'Yes' is clicked
+  }
   window.location.href = "yes_page.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('.no-button')?.addEventListener("click", handleNoClick);
+  document.querySelector('.yes-button')?.addEventListener("click", handleYesClick);
+});
+
   document.querySelector('.yes-button')?.addEventListener("click", handleYesClick);
 });
