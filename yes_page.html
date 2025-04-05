@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yeeeeeeeaaaaaahhhh💋</title>
+  <link rel="stylesheet" href="yes_style.css" />
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      background-color: #fff0f5;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ff1493;
+    }
+
+    p {
+      font-size: 1.5rem;
+      color: #ff69b4;
+    }
+
+    video {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Yayyy! You said YES!</h1>
+  <p>Here's your reward 💋💋💋</p>
+
+  <!-- Bugcat GIF from original -->
+  <div class="gif_container">
+    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmo3c3l5ODh3ZGN6NHhhaDE2Mjg1ZjkwOXczdDFxbWM3dTBtaW9zaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9XY4f3FgFTT4QlaYqa/giphy.gif">
+  </div>
+
+  <!-- Romantic video -->
+  <video id="kissVideo" controls>
+    <source src="kiss.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Romantic music -->
+  <audio id="yesMusic" loop>
+    <source src="yes_music.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <p>You're the CUTEST 💋</p>
+
+  <script>
+    let lastShakeTime = 0;
+
+    function isShake(event) {
+      const acceleration = event.accelerationIncludingGravity;
+      const currentTime = new Date().getTime();
+
+      const threshold = 15;
+      const timeGap = 1000;
+
+      const x = acceleration.x;
+      const y = acceleration.y;
+      const z = acceleration.z;
+
+      const totalAcceleration = Math.sqrt(x * x + y * y + z * z);
+
+      if (totalAcceleration > threshold && currentTime - lastShakeTime > timeGap) {
+        lastShakeTime = currentTime;
+        return true;
+      }
+      return false;
+    }
+
+    function enableShakeToPlay() {
+      const video = document.getElementById("kissVideo");
+      const music = document.getElementById("yesMusic");
+      if (!video || !music) return;
+
+      window.addEventListener("devicemotion", function (event) {
+        if (isShake(event)) {
+          // Vibrate for 500 milliseconds (adjust as needed)
+          if (navigator.vibrate) {
+            navigator.vibrate(500);
+          }
+
+          // Show and play the video on shake
+          video.style.display = "block";
+          video.play();
+        }
+      });
+    }
+
+    // Add click event to trigger the music and video
+    document.body.addEventListener("click", function () {
+      const video = document.getElementById("kissVideo");
+      const music = document.getElementById("yesMusic");
+      const message = document.querySelector("h1");
+
+      // Start playing music immediately when clicked
+      music.play();
+
+      // Display "Yayyyy!" message after clicking Yes
+      message.textContent = "Yayyyy! You're the best! 💋";
+
+      // Show and play the video (optional if needed on click)
+      video.style.display = "block";
+      video.play();
+    }, { once: true });
+
+    // Initialize shake-to-play functionality
+    document.addEventListener("DOMContentLoaded", enableShakeToPlay);
+  </script>
+</body>
+</html>
