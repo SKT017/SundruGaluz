@@ -53,6 +53,7 @@
     }
 })();
 */
+
 const messages = [
   "Are you sure Sundru? 😢",
   "Really really sure?? 🥺",
@@ -79,16 +80,15 @@ function handleNoClick() {
   const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
   yesButton.style.fontSize = `${currentSize * 1.2}px`;
 
-  if (!sadMusicPlayed) {
-    const audio = document.getElementById('sadAudio');
-    if (audio) {
-      audio.play();
-      sadMusicPlayed = true;
-    }
+  const noMusic = document.getElementById('sadAudio');
+  if (noMusic) {
+    noMusic.play(); // Play the sad music immediately when "No" is clicked
   }
 }
 
 function handleYesClick() {
+  const yesMusic = new Audio("yes_music.mp3");
+  yesMusic.play(); // Play the "Yes" music immediately when "Yes" is clicked
   window.location.href = "yes_page.html";
 }
 
@@ -96,4 +96,3 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('.no-button')?.addEventListener("click", handleNoClick);
   document.querySelector('.yes-button')?.addEventListener("click", handleYesClick);
 });
-
