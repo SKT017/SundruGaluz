@@ -14,7 +14,6 @@ const messages = [
 let messageIndex = 0;
 let sadMusicPlayed = false;
 
-// Function for the "No" button click
 function handleNoClick() {
   const noButton = document.querySelector('.no-button');
   const yesButton = document.querySelector('.yes-button');
@@ -25,34 +24,25 @@ function handleNoClick() {
   const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
   yesButton.style.fontSize = `${currentSize * 1.2}px`;
 
-  // Play the sad music immediately
-  const audio = document.getElementById('sadAudio');
-  if (audio && !sadMusicPlayed) {
-    audio.play();
-    sadMusicPlayed = true;
+  if (!sadMusicPlayed) {
+    const audio = document.getElementById('sadAudio');
+    if (audio) {
+      audio.play();
+      sadMusicPlayed = true;
+    }
   }
 }
 
-// Function for the "Yes" button click
 function handleYesClick() {
-  const yesMusic = document.getElementById('yesMusic');
-
-  // Play the yes music immediately
-  if (yesMusic) {
-    yesMusic.play();
-  }
-
-  // Delay navigation slightly to let the music start playing
-  setTimeout(function() {
-    window.location.href = "yes_page.html";
-  }, 300); // Adjust this delay as needed (300ms)
+  // Play the 'yes_music' immediately when clicked
+  const yesMusic = new Audio("yes_music.mp3");
+  yesMusic.play();
+  
+  // Redirect to the 'yes_page.html'
+  window.location.href = "yes_page.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const yesButton = document.querySelector('.yes-button');
-  const noButton = document.querySelector('.no-button');
-
-  // Ensure the buttons work
-  yesButton.addEventListener("click", handleYesClick);
-  noButton.addEventListener("click", handleNoClick);
+  document.querySelector('.no-button')?.addEventListener("click", handleNoClick);
+  document.querySelector('.yes-button')?.addEventListener("click", handleYesClick);
 });
